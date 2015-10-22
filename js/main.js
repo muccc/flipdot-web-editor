@@ -2,6 +2,7 @@ var dataUrl = "";
 var light = 128;
 var invert = false;
 var blackBg = false;
+var shading = true;
 
 $(function () {
 
@@ -106,6 +107,12 @@ $(function () {
             convertToBW($image)
         }, 0);
     })
+    $('#shading').change(function() {
+        shading = $(this).is(":checked");
+        setTimeout(function() {
+            convertToBW($image)
+        }, 0);
+    })
 
     $('#inverted').change(function() {
         invert = $(this).is(":checked");
@@ -145,6 +152,20 @@ function convertToBW($image) {
     var lightC = invert ? 0 : 255;
     var darkC = 255 - lightC;
     var bg = blackBg ? darkC : lightC;
+
+    // Those are boundaries on where to do shading
+    // I made those numbers up, "what looked good", also the logic itself 
+    // is probably kinda wonky
+    var LOWER_BOUNDARY = 4.8/6;
+    var MID_BOUNDARY = 5.2/6;
+    var HIGHER_BOUNDARY = 5.5/6;
+
+    var lightMinL = light*LOWER_BOUNDARY;
+    var lightMinM = light*MID_BOUNDARY;
+    var lightMinH = light*HIGHER_BOUNDARY;
+    var lightMaxH = light + (255-light)*(1-HIGHER_BOUNDARY);
+    var lightMaxM = light + (255-light)*(1-MID_BOUNDARY);
+    var lightMaxL = light + (255-light)*(1-LOWER_BOUNDARY);
     for (var j = 0; j < 64; j++) {
         for (var i = 0; i < 128; i++) {
             var index = (j*4) * imageData.width + (i * 4);
@@ -153,7 +174,56 @@ function convertToBW($image) {
             var blue = imageData.data[index + 2];
             var alpha = imageData.data[index + 3];
             var average = (red + green + blue) / 3;
-            var color = (average < light) ? darkC : lightC;
+            var color;
+            if (shading) {
+                if (average < lightMinL) {
+                    color = darkC;
+                } 
+                else if (average < lightMinM) {
+                    if ((i+j)%8 != 2) {
+                        color = darkC;
+                    } else {
+                        color = lightC;
+                    }
+                } 
+
+                else if (average < lightMinH) {
+                    if ((i+j)%4 != 2) {
+                        color = darkC;
+                    } else {
+                        color = lightC;
+                    }
+                } 
+                else if (average < lightMaxH) {
+                    if ((i+j)%2 == 1) {
+                        color = darkC;
+                    } else {
+                        color = lightC;
+                    }
+                } 
+                else if (average < lightMaxM) {
+                    if ((i+j)%4 == 1) {
+                        color = darkC;
+                    } else {
+                        color = lightC;
+                    }
+                } 
+                else if (average < lightMaxL) {
+                    if ((i+j)%8 == 1) {
+                        color = darkC;
+                    } else {
+                        color = lightC;
+                    }
+                } else {
+                    color = lightC;
+                }
+            } else {
+                if (average < light) {
+                    color = darkC;
+                } else {
+                    color = lightC;
+                }
+            }
             if (alpha === 0) {
                 color = bg;
             }
