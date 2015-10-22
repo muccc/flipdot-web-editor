@@ -84,7 +84,10 @@ $(function () {
         var link = document.createElement("a");
         link.download = "homescreen.png";
         link.href = dataUrl;
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
+        delete link;
     });
 
 
