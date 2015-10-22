@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A basic demo of Cropper.">
+  <title>TREZOR Homepage Cropper</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/cropper.css">
+  <link rel="stylesheet" href="css/slider.css">
+  <link rel="stylesheet" href="css/my.css">
+
+</head>
+<body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">TREZOR Homepage Cropper</div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Image from file</div>
+                    <div class="panel-body">
+                        <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image">
+                            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                            <span title="Upload image">
+                                Upload
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Image from URL</div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" id="url">
+                        <button class="btn btn-primary" id="urlUpload">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Color preview</div>
+                    <div class="panel-body">
+                        <div class="img-preview preview-md"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Final result</div>
+                    <div class="panel-body">
+                        <img id="preview-bw">
+                        <button class="btn btn-success pull-right" id="download">Save</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-xs-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Crop image</div>
+                    <div class="panel-body img-container">
+                        <img src="./picture.jpg" alt="Picture">
+                        <br><i>Hint: zoom by scrolling</i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Tools</div>
+                    <div class="panel-body">
+                        <p>
+                            <b>Rotation</b>
+                        </p>
+                        <p>
+                            <input 
+                                id="rotate" 
+                                data-slider-id='rotateSlider' 
+                                type="text" 
+                                data-slider-min="-180" 
+                                data-slider-max="180" 
+                                data-slider-step="1" 
+                                data-slider-value="0"
+                                style="width: 100%"
+                            />
+                        </p>
+                        <p>
+                            <b>Lightness</b>
+                        </p>
+                        <p>
+                            <input 
+                                id="light" 
+                                data-slider-id='lightSlider' 
+                                type="text" 
+                                data-slider-min="0" 
+                                data-slider-max="255" 
+                                data-slider-step="0.5" 
+                                data-slider-value="128"
+                                style="width: 100%"
+                            />
+                        </p>
+                        <p>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="" id="blackBg">Black background</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="" id="inverted">Invert</label>
+                            </div>
+                        </p>
+                    </div> <!--/panel-body-->
+                </div> <!--/panel-->
+            </div> <!--/col-->
+            <div class="col-xs-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Credits</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>
+                                <a href="https://www.flickr.com/photos/thisparticulargreg/228465996">Buddha's face by ThisParticularGreg</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/fengyuanchen/cropper">Cropper by Fengyuan Chen</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/conejoninja">Some code by Daniel Esteban</a>
+                            </li>
+                        <ul>
+                    </div> <!--/panel-body-->
+                </div> <!--/panel-->
+            </div> <!--/col-->
+
+        </div> <!--/row-->
+    </div>
+
+
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="js/cropper.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
