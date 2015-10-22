@@ -123,13 +123,13 @@ $(function () {
         }, 0);
     })
 
-    /*$('#inverted').change(function() {
+    $('#inverted').change(function() {
         invert = $(this).is(":checked");
         setTimeout(function() {
             convertToBW($image)
         }, 0);
     })
-    $("#contrast").slider()
+    /*$("#contrast").slider()
     .slider('on', 'change', function(arg) {
         contrast = arg.newValue;
         setTimeout(function(){
