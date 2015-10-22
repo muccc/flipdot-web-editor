@@ -1,8 +1,16 @@
+var Caman = require('caman');
+
 var dataUrl = "";
 var light = 128;
 var invert = false;
 var blackBg = false;
 var shading = true;
+
+var contrast = 0;
+var brightness = 0;
+var exposure = 0;
+var sharpen = 0;
+var URL = window.URL || window.webkitURL;
 
 $(function () {
 
@@ -17,7 +25,7 @@ $(function () {
 
     var options = {
         aspectRatio: 128 / 64,
-        preview: '.img-preview',
+    //    preview: '.img-preview',
         crop: function(e) {
             setTimeout(function(){
                 convertToBW($image)
@@ -31,7 +39,6 @@ $(function () {
 
     // Import image
     var $inputImage = $('#inputImage');
-    var URL = window.URL || window.webkitURL;
     var blobURL;
 
     if (URL) {
@@ -116,12 +123,45 @@ $(function () {
         }, 0);
     })
 
-    $('#inverted').change(function() {
+    /*$('#inverted').change(function() {
         invert = $(this).is(":checked");
         setTimeout(function() {
             convertToBW($image)
         }, 0);
     })
+    $("#contrast").slider()
+    .slider('on', 'change', function(arg) {
+        contrast = arg.newValue;
+        setTimeout(function(){
+            convertToBW($image)
+        }, 0);
+    })*/
+    /*$("#brightness").slider()
+    .slider('on', 'change', function(arg) {
+        brightness = arg.newValue;
+        setTimeout(function(){
+            convertToBW($image)
+        }, 0);
+    })*/
+    /*$("#exposure").slider()
+    .slider('on', 'change', function(arg) {
+        exposure = arg.newValue;
+        setTimeout(function(){
+            convertToBW($image)
+        }, 0);
+    })*/
+
+    $("#sharpen").slider()
+    .slider('on', 'change', function(arg) {
+        sharpen = arg.newValue;
+        setTimeout(function(){
+            convertToBW($image)
+        }, 0);
+    })
+
+
+
+
 });
 
 function convertToBlob(url) {
@@ -144,11 +184,39 @@ function convertToBlob(url) {
     });
 }
 
-function convertToBW($image) {
+function camanChanges($image) {
     var canvas = $image.cropper('getCroppedCanvas', {
         width: 128,
         height: 64
     });
+    if (sharpen == 0) {
+        return Promise.resolve(canvas);
+    }
+    return Caman.fromCanvas(canvas).then( function(caman) {
+        return caman.pipeline(function() {
+//            this.contrast(contrast);
+//            this.brightness(brightness);
+//            this.exposure(exposure);
+            this.sharpen(sharpen);
+        })
+    }).then(function() {
+        return canvas;
+    });  
+}
+
+function convertToBW($image) {
+    camanChanges($image).then(_reallyConvertToBW);
+}
+
+function _reallyConvertToBW(canvas) {
+    var colorDataUrl = canvas.toDataURL("image/png");
+    var colorImage = $(".preview-md")[0];
+    colorImage.onload = function(){
+        URL.revokeObjectURL(colorDataUrl)        
+    }
+    colorImage.src = colorDataUrl;
+
+
     var ctx = canvas.getContext("2d");
     var imageData = ctx.getImageData(0,0, 128, 64);
     var lightC = invert ? 0 : 255;
@@ -238,5 +306,9 @@ function convertToBW($image) {
     ctx.putImageData(imageData, 0, 0, 0, 0, imageData.width, imageData.height);
     dataUrl = canvas.toDataURL("image/png");
     var bwImage = $("#preview-bw")[0];
+    bwImage.onload = function(){
+        URL.revokeObjectURL(dataUrl)        
+    }
     bwImage.src = dataUrl;
+    canvas.remove();
 }

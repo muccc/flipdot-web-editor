@@ -52,7 +52,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Color preview</div>
                     <div class="panel-body">
-                        <div class="img-preview preview-md"></div>
+                        <img class="img-preview preview-md">
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                             />
                         </p>
                         <p>
-                            <b>Lightness</b>
+                            <b>Brightness</b>
                         </p>
                         <p>
                             <input 
@@ -112,6 +112,67 @@
                                 style="width: 100%"
                             />
                         </p>
+                        <!--p>
+                            <b>Contrast</b>
+                        </p>
+                        <p>
+                            <input 
+                                id="contrast" 
+                                data-slider-id='contrastSlider' 
+                                type="text" 
+                                data-slider-min="-100" 
+                                data-slider-max="100" 
+                                data-slider-step="1" 
+                                data-slider-value="0"
+                                style="width: 100%"
+                            />
+                        </p-->
+                        <!--p>
+                            <b>Brightness</b>
+                        </p-->
+                        <!--p>
+                            <input 
+                                id="brightness" 
+                                data-slider-id='brightnessSlider' 
+                                type="text" 
+                                data-slider-min="-100" 
+                                data-slider-max="100" 
+                                data-slider-step="1" 
+                                data-slider-value="0"
+                                style="width: 100%"
+                            />
+                        </p> 
+                        <p>
+                            <b>Exposure</b>
+                        </p-->
+                        <!--p>
+                            <input 
+                                id="exposure" 
+                                data-slider-id='exposureSlider' 
+                                type="text" 
+                                data-slider-min="-100" 
+                                data-slider-max="100" 
+                                data-slider-step="1" 
+                                data-slider-value="0"
+                                style="width: 100%"
+                            />
+                        </p--> 
+                        <p>
+                            <b>Sharpen</b>
+                        </p>
+                        <p>
+                            <input 
+                                id="sharpen" 
+                                data-slider-id='sharpenSlider' 
+                                type="text" 
+                                data-slider-min="0" 
+                                data-slider-max="100" 
+                                data-slider-step="1" 
+                                data-slider-value="0"
+                                style="width: 100%"
+                            />
+                        </p>
+ 
                         <p>
                             <div class="checkbox">
                                 <label><input type="checkbox" value="" id="blackBg">Black background</label>
@@ -165,6 +226,7 @@
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="js/caman.js"></script>
   <script src="js/cropper.js"></script>
   <script src="js/slider.js"></script>
   <script src="js/main.js"></script>
