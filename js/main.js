@@ -24,7 +24,7 @@ $(function () {
     var $image = $('.img-container > img');
 
     var options = {
-        aspectRatio: 128 / 64,
+        aspectRatio: (128+2) / (64+2),
     //    preview: '.img-preview',
         crop: function(e) {
             setTimeout(function(){
@@ -184,11 +184,31 @@ function convertToBlob(url) {
     });
 }
 
+function cropCanvas(canvas) {
+    var croppedCanvas = document.createElement("canvas");
+    croppedCanvas.width = 128;
+    croppedCanvas.height = 64;
+    var sourceX = 1;
+    var sourceY = 1;
+    var sourceWidth = 128;
+    var sourceHeight = 64;
+    var destWidth = sourceWidth;
+    var destHeight = sourceHeight;
+    var destX = 0;
+    var destY = 0;
+    var context = croppedCanvas.getContext('2d');
+    context.drawImage(canvas, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+
+    return croppedCanvas;
+
+}
+
 function camanChanges($image) {
     var canvas = $image.cropper('getCroppedCanvas', {
-        width: 128,
-        height: 64
+        width: 128+2,
+        height: 64+2
     });
+
     if (sharpen == 0) {
         return Promise.resolve(canvas);
     }
@@ -205,7 +225,9 @@ function camanChanges($image) {
 }
 
 function convertToBW($image) {
-    camanChanges($image).then(_reallyConvertToBW);
+    camanChanges($image).then(function(canvas) { 
+        _reallyConvertToBW(cropCanvas(canvas))
+    });
 }
 
 function _reallyConvertToBW(canvas) {
