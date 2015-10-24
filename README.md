@@ -1,7 +1,7 @@
-TREZOR Homepage Cropper
+TREZOR Homescreen Cropper
 =====
 
-Simple cropper for TREZOR homepage images, based on [Fengyuan Cheng's jQuery cropper](https://github.com/fengyuanchen/cropper).
+Simple cropper for TREZOR homescreen images, based on [Fengyuan Cheng's jQuery cropper](https://github.com/fengyuanchen/cropper).
 
 Demo here
 
