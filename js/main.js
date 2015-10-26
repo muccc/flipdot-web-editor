@@ -24,7 +24,7 @@ $(function () {
     var $image = $('.img-container > img');
 
     var options = {
-        aspectRatio: (128+2) / (64+2),
+        aspectRatio: (128+4) / (64+4),
     //    preview: '.img-preview',
         crop: function(e) {
             setTimeout(function(){
@@ -188,8 +188,8 @@ function cropCanvas(canvas) {
     var croppedCanvas = document.createElement("canvas");
     croppedCanvas.width = 128;
     croppedCanvas.height = 64;
-    var sourceX = 1;
-    var sourceY = 1;
+    var sourceX = 2;
+    var sourceY = 2;
     var sourceWidth = 128;
     var sourceHeight = 64;
     var destWidth = sourceWidth;
@@ -205,8 +205,8 @@ function cropCanvas(canvas) {
 
 function camanChanges($image) {
     var canvas = $image.cropper('getCroppedCanvas', {
-        width: 128+2,
-        height: 64+2
+        width: 128+4,
+        height: 64+4
     });
 
     if (sharpen == 0) {
