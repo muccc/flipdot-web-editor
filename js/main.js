@@ -74,8 +74,9 @@ $(function () {
     }
 
     $("#urlUpload").click(function(){
-        convertToBlob($("#url").val()).then(function(str){
-            
+        var url = $("#url").val();
+        convertToBlob(url).then(function(str){
+            $("#url").val("");
             $image.one('built.cropper', function () {
               $image.cropper('setDragMode', "move")
             })
