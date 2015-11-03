@@ -1,10 +1,8 @@
-TREZOR Homescreen Cropper
-=====
+TREZOR Homescreen Editor
+========================
 
-Simple cropper for TREZOR homescreen images, based on [Fengyuan Cheng's jQuery cropper](https://github.com/fengyuanchen/cropper).
+Simple editor for TREZOR homescreen images, based on [Fengyuan Cheng's jQuery cropper](https://github.com/fengyuanchen/cropper).
 
-Demo here
-
-http://www.karelbilek.com/trezor-cropper/
+http://trezor.github.io/homescreen-editor
 
 MIT (c) Karel Bílek 2015
