@@ -96,7 +96,7 @@ $(function () {
 			data : { png : dataUrl},
 			success: function(data, textStatus, jqXHR)
 			{
-				alert("success");
+				//alert("success");
 			},
 			error: function (jqXHR, textStatus, errorThrown)
 			{
