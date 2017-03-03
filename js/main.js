@@ -24,7 +24,7 @@ $(function () {
     var $image = $('.img-container > img');
 
     var options = {
-        aspectRatio: (128+4) / (64+4),
+        aspectRatio: (144) / (120),
     //    preview: '.img-preview',
         crop: function(e) {
             setTimeout(function(){
@@ -187,12 +187,12 @@ function convertToBlob(url) {
 
 function cropCanvas(canvas) {
     var croppedCanvas = document.createElement("canvas");
-    croppedCanvas.width = 128;
-    croppedCanvas.height = 64;
+    croppedCanvas.width = 144;
+    croppedCanvas.height = 120;
     var sourceX = 2;
     var sourceY = 2;
-    var sourceWidth = 128;
-    var sourceHeight = 64;
+    var sourceWidth = 144;
+    var sourceHeight = 120;
     var destWidth = sourceWidth;
     var destHeight = sourceHeight;
     var destX = 0;
@@ -206,8 +206,8 @@ function cropCanvas(canvas) {
 
 function camanChanges($image) {
     var canvas = $image.cropper('getCroppedCanvas', {
-        width: 128+4,
-        height: 64+4
+        width: 144+4,
+        height: 128+4
     });
 
     if (sharpen == 0) {
@@ -241,7 +241,7 @@ function _reallyConvertToBW(canvas) {
 
 
     var ctx = canvas.getContext("2d");
-    var imageData = ctx.getImageData(0,0, 128, 64);
+    var imageData = ctx.getImageData(0,0, 144, 120);
     var lightC = invert ? 0 : 255;
     var darkC = 255 - lightC;
     var bg = blackBg ? darkC : lightC;
@@ -259,8 +259,8 @@ function _reallyConvertToBW(canvas) {
     var lightMaxH = light + (255-light)*(1-HIGHER_BOUNDARY);
     var lightMaxM = light + (255-light)*(1-MID_BOUNDARY);
     var lightMaxL = light + (255-light)*(1-LOWER_BOUNDARY);
-    for (var j = 0; j < 64; j++) {
-        for (var i = 0; i < 128; i++) {
+    for (var j = 0; j < 120; j++) {
+        for (var i = 0; i < 144; i++) {
             var index = (j*4) * imageData.width + (i * 4);
             var red = imageData.data[index];
             var green = imageData.data[index + 1];
