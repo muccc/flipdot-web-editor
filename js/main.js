@@ -88,8 +88,26 @@ $(function () {
         });
     });    
 
+	$("#sendToFlipdot").click(function(){
+   		//alert(dataUrl);
+		$.ajax({
+			url : "/png",
+			type: "POST",
+			data : { png : dataUrl},
+			success: function(data, textStatus, jqXHR)
+			{
+				alert("success");
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
+				alert(textStatus);
+			}
+		});
+
+	});
+
     $("#download").click(function(){
-        var link = document.createElement("a");
+		var link = document.createElement("a");
         link.download = "homescreen.png";
         link.href = dataUrl;
         document.body.appendChild(link);
